@@ -1,19 +1,22 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from '../../../assets/6165897.jpg'
+import { useContext } from "react";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 const NavBar = () => {
-const user =true
+    const { user,logOut } = useContext(AuthContext)
+
     const links = <>
         <div className="gap-2 lg:flex  flex-row">
             <li className="text-xl"> <NavLink to='/' className={({ isActive, isPending }) => isPending ? 'pending' : isActive ? 'text-green-400 bg-black underline ' : ''}>Home</NavLink> </li>
             {
-                user ? <li className="text-xl"> <NavLink to='/addblog' className={({ isActive, isPending }) => isPending ? 'pending' : isActive ?  'text-green-400 bg-black underline ' : ''}>Add Blog</NavLink> </li> : <li className="text-xl"> <Link to='/login' >Add Blog</Link> </li>
+                user ? <li className="text-xl"> <NavLink to='/addblog' className={({ isActive, isPending }) => isPending ? 'pending' : isActive ? 'text-green-400 bg-black underline ' : ''}>Add Blog</NavLink> </li> : <li className="text-xl"> <Link to='/login' >Add Blog</Link> </li>
             }
-                        <li className="text-xl"> <NavLink to='/allblogs' className={({ isActive, isPending }) => isPending ? 'pending' : isActive ? 'text-green-400 bg-black underline ' : ''}>All Blogs</NavLink> </li> 
+            <li className="text-xl"> <NavLink to='/allblogs' className={({ isActive, isPending }) => isPending ? 'pending' : isActive ? 'text-green-400 bg-black underline ' : ''}>All Blogs</NavLink> </li>
             {
                 user ? <li className="text-xl"> <NavLink to='/wishlist' className={({ isActive, isPending }) => isPending ? 'pending' : isActive ? 'text-green-400 bg-black underline ' : ''}>wishlist</NavLink> </li> : <li className="text-xl"> <Link to='/login' >WishList</Link> </li>
             }
-            <li className="text-xl"> <NavLink to='/featuredblogs' className={({ isActive, isPending }) => isPending ? 'pending' : isActive ? 'text-green-400 bg-black underline ' : ''}>Featured Blogs</NavLink> </li> 
+            <li className="text-xl"> <NavLink to='/featuredblogs' className={({ isActive, isPending }) => isPending ? 'pending' : isActive ? 'text-green-400 bg-black underline ' : ''}>Featured Blogs</NavLink> </li>
 
 
         </div>
@@ -33,7 +36,7 @@ const user =true
                             {links}
                         </ul>
                     </div>
-                   
+
                     <Link to='/' className="btn btn-ghost font-bold normal-case text-s  "><img className="h-12 w-28" src={logo} alt="" /></Link>
                 </div>
 
@@ -61,21 +64,21 @@ const user =true
                                 </li>
                                 <li>
                                     <button className="btn btn-sm  btn-ghost" onClick={logOut}>Logout</button>
-                                    
+
                                 </li>
                             </ul>
                         </div>
                             :
-                        <div>
-                             <Link to='/login'>
-                            <button className="btn btn-sm  btn-ghost">Login</button>
-                        </Link>
-                             <Link to='/register'>
-                            <button className="btn btn-sm  btn-ghost">Register</button>
-                        </Link>
-                        </div>
+                            <div>
+                                <Link to='/login'>
+                                    <button className="btn btn-sm  btn-ghost">Login</button>
+                                </Link>
+                                <Link to='/register'>
+                                    <button className="btn btn-sm  btn-ghost">Register</button>
+                                </Link>
+                            </div>
 
-                        
+
                     }
                 </div>
             </div>

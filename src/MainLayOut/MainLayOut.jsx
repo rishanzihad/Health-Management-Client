@@ -1,13 +1,21 @@
-import { Outlet } from "react-router-dom";
-import Home from "../Pages/Home/Home";
+import { Outlet, useLocation } from "react-router-dom";
+
+import { Toaster } from "react-hot-toast";
+import NavBar from "../Pages/Shared/NavBar/NavBar";
 
 
 
 const MainLayOut = () => {
+    const location =useLocation()
+    const noHeaderFooter =location.pathname.includes('login')||location.pathname.includes('register')
     return (
         <div className="max-w-[1200px] mx-auto">
-         <Home></Home>
+            {noHeaderFooter ||   <NavBar></NavBar>}
+     
            <Outlet></Outlet>
+          
+         
+            <Toaster/>
         </div>
     );
 };

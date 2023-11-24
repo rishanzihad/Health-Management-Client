@@ -1,11 +1,17 @@
+
+import { Helmet } from "react-helmet-async";
 import NavBar from "../Shared/NavBar/NavBar";
 
 
+
 const Home = () => {
+    
     return (
         <div >
-              <NavBar></NavBar>
-           
+             <Helmet>
+                <title>Home</title>
+            
+            </Helmet>
         </div>
     );
 };
