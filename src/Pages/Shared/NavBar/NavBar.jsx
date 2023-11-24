@@ -1,8 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
-
+import logo from '../../../assets/6165897.jpg'
 
 const NavBar = () => {
-   const user =true
+const user =false
     const links = <>
         <div className="gap-2 lg:flex  flex-row">
             <li className="text-xl"> <NavLink to='/' className={({ isActive, isPending }) => isPending ? 'pending' : isActive ? 'text-green-400 bg-black underline ' : ''}>Home</NavLink> </li>
@@ -33,8 +33,8 @@ const NavBar = () => {
                             {links}
                         </ul>
                     </div>
-
-                    <Link to='/' className="btn btn-ghost font-bold normal-case text-s md:text-3xl">Blog Mania</Link>
+                   
+                    <Link to='/' className="btn btn-ghost font-bold normal-case text-s  "><img className="h-12 w-28" src={logo} alt="" /></Link>
                 </div>
 
                 <div className="navbar-center hidden lg:flex">
