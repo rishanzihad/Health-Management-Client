@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import logo from '../../../assets/6165897.jpg'
 
 const NavBar = () => {
-const user =false
+const user =true
     const links = <>
         <div className="gap-2 lg:flex  flex-row">
             <li className="text-xl"> <NavLink to='/' className={({ isActive, isPending }) => isPending ? 'pending' : isActive ? 'text-green-400 bg-black underline ' : ''}>Home</NavLink> </li>
