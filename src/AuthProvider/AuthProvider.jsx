@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { GoogleAuthProvider,  createUserWithEmailAndPassword,  getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile,  } from "firebase/auth";
 import app from "../Firebase/firebase.config";
 import axios from "axios";
+import useAxiosPublic from "../Pages/Hooks/useAxiosPublic";
 
 export const AuthContext =createContext(null)
 const auth = getAuth(app)
@@ -11,6 +12,7 @@ const AuthProvider = ({children}) => {
     
 
     const[user,setUser] =useState()
+    const axiosPublic =useAxiosPublic()
     const [loading,setLoading] =useState(true)
     const googleLogin=()=>{
         setLoading(true)
@@ -40,30 +42,29 @@ const AuthProvider = ({children}) => {
     }
 
     useEffect(()=>{
-        const unSubscribe =onAuthStateChanged(auth,(currentUser=>{
-            const userEmail = currentUser?.email
-            const loggedEmail ={email:userEmail}
+        const unsubscribe =onAuthStateChanged(auth,currentUser=>{
             setUser(currentUser)
-            setLoading(false)
             if(currentUser){
-         
-                axios.post('https://blog-mania-theta.vercel.app/jwt',loggedEmail,{withCredential:true})
+                const userInfo={
+                   email:currentUser.email 
+                }
+                axiosPublic.post('/jwt',userInfo)
                 .then(res=>{
-                    console.log("token response",res.data)
+                    if(res.data.token){
+                        localStorage.setItem('access-token',res.data.token)
+                        setLoading(false)
+                    }
                 })
             }
             else{
-                axios.post('https://blog-mania-theta.vercel.app/logout',loggedEmail,{
-                    withCredentials:true
-                })
-                .then(res=>{
-                    console.log(res.data)
-                })
+                localStorage.removeItem('access-token')
+                setLoading(false)
             }
-        }))
-        return (()=>{
-           return unSubscribe()
-        }) 
+            
+        })
+        return ()=>{
+            return unsubscribe
+        }
     },[])
     const authInfo={
         googleLogin,register,login,user,logOut,loading,handleUpdateProfile

@@ -1,38 +1,32 @@
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { useContext } from "react";
-import { FcGoogle } from 'react-icons/fc';
+
 import toast from "react-hot-toast";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 const Login = () => {
-  const { googleLogin, login}=useContext(AuthContext)
-  const navigate =useNavigate()
-const handleGooglelLogin =()=>{
-  googleLogin()
-  .then(res=>{
-     toast.success('User Log In Successfully')
-      navigate('/')
-  })
-.catch(error =>toast.error(error.message))
-}
-  const handleLogin =e=>{
+  const {  login } = useContext(AuthContext)
+  const navigate = useNavigate()
+
+  const handleLogin = e => {
     e.preventDefault();
-    
+
     const form = e.target;
     const email = form.email.value;
- 
+
     const password = form.password.value;
-    login(email,password)
-    .then(res=>{
-      toast.success('User Log In Successfully')
-       navigate('/')
-   })
- .catch(error =>toast.error(error.message))
+    login(email, password)
+      .then(res => {
+        toast.success('User Log In Successfully')
+        navigate('/')
+      })
+      .catch(error => toast.error(error.message))
   }
 
-    return (
-      <div className="flex justify-center items-center mt-36">
-      
-         <div className="relative flex flex-col rounded-xl bg-transparent bg-clip-border text-gray-700 shadow-none">
+  return (
+    <div className="flex justify-center items-center mt-36">
+
+      <div className="relative flex flex-col rounded-xl bg-transparent bg-clip-border text-gray-700 shadow-none">
         <h4 className="block text-white font-sans text-4xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
           Sign In
         </h4>
@@ -40,11 +34,11 @@ const handleGooglelLogin =()=>{
           Enter your details to Login.
         </p>
         <form onSubmit={handleLogin} className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
-        <div className="mb-4 flex flex-col gap-6">
+          <div className="mb-4 flex flex-col gap-6">
             <div className="relative h-11 w-full min-w-[200px]">
               <input
-              name="email"
-              required
+                name="email"
+                required
                 className="peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                 placeholder=""
               />
@@ -54,8 +48,8 @@ const handleGooglelLogin =()=>{
             </div>
             <div className="relative h-11 w-full min-w-[200px]">
               <input
-              name="password"
-              required
+                name="password"
+                required
                 type="password"
                 className="peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                 placeholder=" "
@@ -65,31 +59,31 @@ const handleGooglelLogin =()=>{
               </label>
             </div>
           </div>
-        
+
           <button
-            className="mt-6 block w-full select-none rounded-lg bg-pink-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            className="mt-6 block w-full select-none rounded-lg bg-red-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
             type="submit"
             data-ripple-light="true"
           >
             Login
           </button>
-          <button onClick={()=>handleGooglelLogin(googleLogin)} className="btn w-full mt-4 btn-neutral  "><FcGoogle></FcGoogle>Google</button>
-      
+<SocialLogin></SocialLogin>
+
           <p className="mt-4 text-white block text-center font-sans text-base font-normal leading-relaxed  antialiased">
-            Already have an account?  
+            Already have an account?
             <Link to="/register"
               className="font-medium text-pink-500 transition-colors hover:text-blue-700"
-         
+
             >
-               Register
+              Register
             </Link>
           </p>
         </form>
       </div>
-    
-      </div>
-      
-    );
+
+    </div>
+
+  );
 };
 
 export default Login;

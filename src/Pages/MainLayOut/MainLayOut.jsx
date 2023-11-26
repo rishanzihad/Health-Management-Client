@@ -1,7 +1,8 @@
 import { Outlet, useLocation } from "react-router-dom";
 
 import { Toaster } from "react-hot-toast";
-import NavBar from "../Pages/Shared/NavBar/NavBar";
+import NavBar from "../Shared/NavBar/NavBar";
+
 
 
 

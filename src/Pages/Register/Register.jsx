@@ -4,10 +4,14 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+import Swal from 'sweetalert2';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
+import SocialLogin from '../../Components/SocialLogin/SocialLogin';
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTE
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 
 const Register = () => {
+    const axiosPublic =useAxiosPublic()
     const {register,handleUpdateProfile}=useContext(AuthContext)
     const navigate =useNavigate()
     const handleRegister = async (e) => {
@@ -54,8 +58,23 @@ const Register = () => {
                   
                 handleUpdateProfile(name,image)
                 .then(()=>{
-                    toast.success('User Create Successfully')
-                    navigate('/')
+                    const userInfo ={
+                        name,
+                        email
+                    }
+                    console.log(userInfo)
+                    axiosPublic.post('/users',userInfo)
+                    .then(res=>{
+                     if(res.data.insertedId){
+                       
+                        toast.success('User Create Successfully')
+                   
+                         navigate('/');
+                     }
+                    })
+                    
+                  
+                   
                 })
             })
             .catch(error =>{
@@ -125,7 +144,7 @@ const Register = () => {
                             </label>
                         </div>
                     </div>
-                    
+                   
                     <button
                         className="mt-6 block w-full select-none rounded-lg bg-pink-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                         type='submit'
@@ -133,13 +152,14 @@ const Register = () => {
                     >
                         Register
                     </button>
+                    <SocialLogin></SocialLogin>
                     <p className="mt-4 text-white block text-center font-sans text-base font-normal leading-relaxed antialiased">
                         Already have an account? 
                         <Link to='/login'
                             className="font-medium text-pink-500 transition-colors hover:text-blue-700"
                             
                         >
-                            Register
+                           Sign Up
                         </Link>
                     </p>
                 </form>

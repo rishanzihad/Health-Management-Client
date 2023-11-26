@@ -1,8 +1,9 @@
 
 import { Helmet } from "react-helmet-async";
-import NavBar from "../Shared/NavBar/NavBar";
+
 import Banner from "./Banner/Banner";
-import AddCamp from "../AddCamp/AddCamp";
+import PopularCamp from "./PopularCamp/PopularCamp";
+
 
 
 
@@ -15,7 +16,8 @@ const Home = () => {
             
             </Helmet>
             <Banner></Banner>
-            <AddCamp></AddCamp>
+            <PopularCamp></PopularCamp>
+           
         </div>
     );
 };

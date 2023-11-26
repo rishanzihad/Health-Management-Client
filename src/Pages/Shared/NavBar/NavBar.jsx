@@ -2,23 +2,30 @@ import { Link, NavLink } from "react-router-dom";
 import logo from '../../../assets/medical-camp-2990018-2484904.png'
 import { useContext } from "react";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../../Hooks/useCart";
 
 const NavBar = () => {
     const { user,logOut } = useContext(AuthContext)
-
+    const [cart] =useCart()
     const links = <>
-        <div className="gap-2 lg:flex  flex-row">
+        <div className="gap-2 lg:flex text-white flex-row">
             <li className="text-xl"> <NavLink to='/' className={({ isActive, isPending }) => isPending ? 'pending' : isActive ? 'text-green-400 bg-black underline ' : ''}>Home</NavLink> </li>
             {
-                user ? <li className="text-xl"> <NavLink to='/addblog' className={({ isActive, isPending }) => isPending ? 'pending' : isActive ? 'text-green-400 bg-black underline ' : ''}>Available Camps</NavLink> </li> : <li className="text-xl"> <Link to='/login' >Available Camps</Link> </li>
+                user ? <li className="text-xl"> <NavLink to='/availableCamp' className={({ isActive, isPending }) => isPending ? 'pending' : isActive ? 'text-green-400 bg-black underline ' : ''}>Available Camps</NavLink> </li> : <li className="text-xl"> <Link to='/login' >Available Camps</Link> </li>
             }
 
-            {
-                user ? <li className="text-xl"> <NavLink to='/wishlist' className={({ isActive, isPending }) => isPending ? 'pending' : isActive ? 'text-green-400 bg-black underline ' : ''}>Dashboard </NavLink> </li> : <li className="text-xl"> <Link to='/login' >Dashboard </Link> </li>
-            }
-                        <li className="text-xl"> <NavLink to='/allblogs' className={({ isActive, isPending }) => isPending ? 'pending' : isActive ? 'text-green-400 bg-black underline ' : ''}>Contact Us</NavLink> </li>
+           
+                        <li className="text-xl"> <NavLink to='/contactUs' className={({ isActive, isPending }) => isPending ? 'pending' : isActive ? 'text-green-400 bg-black underline ' : ''}>Contact Us</NavLink> </li>
 
-
+                        <li>
+            <Link to="/dashboard/carts">
+                <button className="btn">
+                    <FaShoppingCart className="mr-2"></FaShoppingCart>
+                    <div className="badge badge-secondary">+{cart.length}</div>
+                </button>
+            </Link>
+        </li>
         </div>
 
 

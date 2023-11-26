@@ -1,39 +1,52 @@
 import { useForm } from "react-hook-form";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
+import { useContext } from "react";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTE;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddCamp = () => {
+    const {user}=useContext(AuthContext)
     const axiosPublic = useAxiosPublic();
-    const { handleSubmit, register, formState: { errors } } = useForm();
-
+    const { handleSubmit, register,reset, formState: { errors } } = useForm();
+    const axiosSecure =useAxiosSecure()
     const onSubmit = async (data) => {
         const imageFile = { image: data.image[0] };
-
-        // Include all the form data
-        const formData = {
-            name: data.name,
-            image: imageFile,
-            fees: data.fees,
-            scheduledDate: data.scheduledDate,
-            scheduledTime: data.scheduledTime,
-            location: data.location,
-            specializedServices: data.specializedServices,
-            healthcareProfessionals: data.healthcareProfessionals,
-            targetAudience: data.targetAudience,
-            comprehensiveDescription: data.comprehensiveDescription,
-        };
-
-        console.log(formData);
-
-        const res = await axiosPublic.post(image_hosting_api, formData, {
-            headers: {
-                'Content-Type': "multipart/form-data"
+        const res =await axiosPublic.post(image_hosting_api,imageFile,{
+            headers:{
+                'Content-Type':"multipart/form-data"
             }
-        });
-
-        // Handle the response as needed
-        console.log(res.data);
+           })
+           if(res.data.success){
+            const formData = {
+                participant:data.participant,
+                organizers:user.displayName,
+                name: data.name,
+                image: res.data.data.display_url,
+                fees: data.fees,
+                scheduledDate: data.scheduledDate,
+                scheduledTime: data.scheduledTime,
+                location: data.location,
+                specializedServices: data.specializedServices,
+                healthcareProfessionals: data.healthcareProfessionals,
+                targetAudience: data.targetAudience,
+                comprehensiveDescription: data.comprehensiveDescription,
+            };
+            console.log(formData)
+            const menuRes =await axiosSecure.post('/camps',formData)
+        if(menuRes.data.insertedId){
+            reset()
+            Swal.fire({
+                position:'top-end',
+                title: `${data.name} is added to the Camp Collection`,
+               showConfirmButton: false,
+               timer: 1500
+              })
+        }
+        }
+        console.log(res.data)
     };
 
     return (
@@ -95,6 +108,20 @@ const AddCamp = () => {
                         type="text"
                         {...register('location', { required: true })}
                         placeholder="Venue Location"
+                        className="input input-bordered w-full"
+                    />
+                </div>
+                <div className="form-control w-full my-6">
+                    <label className="label">
+                        <span className="label-text">Participant</span>
+                    </label>
+                    <input
+                    
+                    defaultValue={0}
+                        required
+                        type="number"
+                        {...register('participant', { required: true })}
+                        placeholder="Participant"
                         className="input input-bordered w-full"
                     />
                 </div>
