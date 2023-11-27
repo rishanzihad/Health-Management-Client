@@ -11,6 +11,7 @@ const RegistrationModal = ({ isOpen, onClose, onRegister, camp }) => {
     const axiosSecure=useAxiosSecure()
     const {handleSubmit,register,reset,formState: { errors } } = useForm();
     const {user}=useContext(AuthContext)
+   
     const onSubmit = async (data) => {
         const participantDetails = {
             
@@ -19,7 +20,7 @@ const RegistrationModal = ({ isOpen, onClose, onRegister, camp }) => {
             fees,
             image,
 
-            email:user.email,
+            email:user?.email,
             name: data.name,
             healthInfo:data.healthInfo,
             age: data.age,

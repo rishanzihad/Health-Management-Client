@@ -5,6 +5,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { useState } from "react";
 
 import useCart from "../../Hooks/useCart";
+import useAdmin from "../../Hooks/useAdmin";
 
 const DropdownMenu = ({ isAdmin, isMenuOpen, closeMenu }) => {
   const [cart] = useCart();
@@ -23,8 +24,8 @@ const DropdownMenu = ({ isAdmin, isMenuOpen, closeMenu }) => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/manageItems">
-              <FaList></FaList> Manage Items
+            <NavLink to="/dashboard/manageCamps">
+              <FaList></FaList> Manage Camps
             </NavLink>
           </li>
           <li>
@@ -89,9 +90,9 @@ const DropdownMenu = ({ isAdmin, isMenuOpen, closeMenu }) => {
 
 const Dashboard = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const cart = true;
-  const isAdmin = false;
 
+  const [isAdmin] = useAdmin();
+  //const isAdmin = true
   const handleToggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
