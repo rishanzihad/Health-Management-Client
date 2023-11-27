@@ -1,11 +1,14 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
+
+
+
 import Swal from "sweetalert2";
+
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useCamp from "../../Hooks/useCamp";
-import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import useCart from "../../Hooks/useCart";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 
 const CheckOut = () => {
@@ -18,17 +21,18 @@ const CheckOut = () => {
     const stripe = useStripe();
     const elements = useElements();
     const navigate =useNavigate()
-    const totalfees = cart.reduce((total, item) => total + item.fees, 0)
+    const totalFees = cart.reduce((total, item) => total + parseFloat(item.fees), 0)
+    console.log(totalFees)
     useEffect(() => {
-        if (totalfees > 0) {
-            axiosSecure.post('/create-payment-intent', { price: totalfees })
+        if (totalFees > 0) {
+            axiosSecure.post('/create-payment-intent', { fees: totalFees })
                 .then(res => {
                     console.log(res.data.clientSecret);
                     setClientSecret(res.data.clientSecret);
                 })
         }
 
-    }, [axiosSecure, totalfees])
+    }, [axiosSecure, totalFees])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -76,7 +80,7 @@ const CheckOut = () => {
 
                 const payment = {
                     email: user.email,
-                    price: totalPrice,
+                    fees: totalFees,
                     transactionId: paymentIntent.id,
                     date: new Date(), // utc date convert. use moment js to 
                     cartIds: cart.map(item => item._id),
@@ -120,7 +124,7 @@ const CheckOut = () => {
                     },
                 }}
             />
-            <button className="btn btn-sm btn-primary my-4" type="submit" disabled={!stripe ||!clientSecret  }>
+            <button className="btn btn-sm btn-primary my-4" type="submit" disabled={!stripe ||!clientSecret }>
                 Pay
             </button>
             <p className="text-red-600">{error}</p>
