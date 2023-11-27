@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import useCart from "../../Hooks/useCart";
 import useAdmin from "../../Hooks/useAdmin";
+import { Toaster } from "react-hot-toast";
 
 const DropdownMenu = ({ isAdmin, isMenuOpen, closeMenu }) => {
   const [cart] = useCart();
@@ -115,6 +116,7 @@ const Dashboard = () => {
 
       <div className="flex-1 md:w-full p-8">
         <Outlet />
+        <Toaster/>
       </div>
     </div>
   );

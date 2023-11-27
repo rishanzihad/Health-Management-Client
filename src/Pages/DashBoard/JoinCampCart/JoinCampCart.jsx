@@ -10,7 +10,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const JoinCampCart = () => {
     const [cart, refetch] = useCart();
-    const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+    const totalfees = cart.reduce((total, item) => total + item.fees, 0);
     const axiosSecure = useAxiosSecure();
 
     const handleDelete = id => {
@@ -44,25 +44,24 @@ const JoinCampCart = () => {
         <div>
             <div className="flex justify-evenly mb-8">
                 <h2 className="text-4xl">Items: {cart.length}</h2>
-                <h2 className="text-4xl">Total Price: {totalPrice.toFixed(2)}</h2>
-               {cart.length? <Link to="/dashboard/payment">
-               <button  className="btn btn-primary">Pay</button>
-               </Link>:<button disabled className="btn btn-primary">Pay</button>
-               }
+                <h2 className="text-4xl">Total Price: ${totalfees}</h2>
+              
 
             </div>
             <div className="overflow-x-auto">
                 <table className="table  w-full">
                     {/* head */}
                     <thead>
-                        <tr>
+                        <tr >
                             <th>
                                 #
                             </th>
                             <th>Image</th>
                             <th>Name</th>
                             <th>Price</th>
+                            <th >Pay</th>
                             <th>Action</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -83,7 +82,12 @@ const JoinCampCart = () => {
                                 <td>
                                     {item.name}
                                 </td>
-                                <td>${item.price}</td>
+                                <td>${item.fees}</td>
+                                <td>
+                                    <Link to="/dashboard/payment">
+                                        <button className="btn btn-sm bg-green-400 text-white">Pay</button>
+                                    </Link>
+                                </td>
                                 <th>
                                     <button
                                         onClick={() => handleDelete(item._id)}
@@ -91,6 +95,7 @@ const JoinCampCart = () => {
                                         <FaTrashAlt className="text-red-600"></FaTrashAlt>
                                     </button>
                                 </th>
+                              
                             </tr>)
                         }
 

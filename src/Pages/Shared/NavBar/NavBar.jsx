@@ -2,14 +2,14 @@ import { Link, NavLink } from "react-router-dom";
 import logo from '../../../assets/medical-camp-2990018-2484904.png'
 import { useContext } from "react";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaCampground, } from "react-icons/fa";
 import useCart from "../../Hooks/useCart";
 
 const NavBar = () => {
     const { user,logOut } = useContext(AuthContext)
     const [cart] =useCart()
     const links = <>
-        <div className="gap-2 lg:flex text-white flex-row">
+        <div className="gap-2 lg:flex text-white items-center flex-row">
             <li className="text-xl"> <NavLink to='/' className={({ isActive, isPending }) => isPending ? 'pending' : isActive ? 'text-green-400 bg-black underline ' : ''}>Home</NavLink> </li>
             {
                 user ? <li className="text-xl"> <NavLink to='/availableCamp' className={({ isActive, isPending }) => isPending ? 'pending' : isActive ? 'text-green-400 bg-black underline ' : ''}>Available Camps</NavLink> </li> : <li className="text-xl"> <Link to='/login' >Available Camps</Link> </li>
@@ -20,8 +20,9 @@ const NavBar = () => {
 
                         <li>
             <Link to="/dashboard/carts">
-                <button className="btn">
-                    <FaShoppingCart className="mr-2"></FaShoppingCart>
+                <button className="btn ">
+                    DashBoard
+                    <FaCampground className="mr-2"></FaCampground >
                     <div className="badge badge-secondary">+{cart.length}</div>
                 </button>
             </Link>
