@@ -10,7 +10,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const JoinCampCart = () => {
     const [cart, refetch] = useCart();
-    const totalfees = cart.reduce((total, item) => total + item.fees, 0);
+    const totalfees = cart.reduce((total, item) => total + parseFloat(item.fees), 0);
     const axiosSecure = useAxiosSecure();
 
     const handleDelete = id => {
@@ -84,8 +84,8 @@ const JoinCampCart = () => {
                                 </td>
                                 <td>${item.fees}</td>
                                 <td>
-                                    <Link to="/dashboard/payment">
-                                        <button className="btn btn-sm bg-green-400 text-white">Pay</button>
+                                    <Link to={`/dashboard/payment/${item._id}`}>
+                                        <button  className="btn btn-sm bg-green-400 text-white">Pay</button>
                                     </Link>
                                 </td>
                                 <th>

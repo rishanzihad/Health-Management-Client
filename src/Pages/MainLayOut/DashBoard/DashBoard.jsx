@@ -7,11 +7,30 @@ import { useState } from "react";
 import useCart from "../../Hooks/useCart";
 import useAdmin from "../../Hooks/useAdmin";
 import { Toaster } from "react-hot-toast";
+import useHealthProfes from "../../Hooks/useHealthProfes";
 
-const DropdownMenu = ({ isAdmin, isMenuOpen, closeMenu }) => {
+const DropdownMenu = ({ isAdmin,isHealthcareProfessionals,  isMenuOpen, closeMenu }) => {
+ 
   const [cart] = useCart();
+
   return (
     <ul className={`menu p-4 ${isMenuOpen ? "block" : "hidden"} md:block`}>
+      {
+       isHealthcareProfessionals?<>
+        <li>
+            <NavLink to="/dashboard/adminHome">
+              <FaHome></FaHome> Healt Home
+            </NavLink>
+          </li>
+       </>:
+       <><li>
+         <NavLink to="/dashboard/userHome">
+           <FaHome></FaHome> User Home
+         </NavLink>
+       </li>
+       </>
+         
+      }
       {isAdmin ? (
         <>
           <li>
@@ -32,6 +51,11 @@ const DropdownMenu = ({ isAdmin, isMenuOpen, closeMenu }) => {
           <li>
             <NavLink to="/dashboard/contactUser">
               <FaBook></FaBook> Contact User
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/dashboard/participantInfo">
+              <FaBook></FaBook> Participant Info
             </NavLink>
           </li>
           <li>
@@ -69,6 +93,7 @@ const DropdownMenu = ({ isAdmin, isMenuOpen, closeMenu }) => {
           </li>
         </>
       )}
+      
       <div className="divider"></div>
       <li>
         <NavLink to="/">
@@ -91,8 +116,8 @@ const DropdownMenu = ({ isAdmin, isMenuOpen, closeMenu }) => {
 
 const Dashboard = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
-
   const [isAdmin] = useAdmin();
+const [isHealthcareProfessionals]=useHealthProfes()
   //const isAdmin = true
   const handleToggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -111,7 +136,7 @@ const Dashboard = () => {
             <IoMenu className="mr-2" /> Menu
           </button>
         </div>
-        <DropdownMenu isAdmin={isAdmin} isMenuOpen={isMenuOpen} closeMenu={handleCloseMenu} />
+        <DropdownMenu isHealthcareProfessionals={isHealthcareProfessionals} isAdmin={isAdmin} isMenuOpen={isMenuOpen} closeMenu={handleCloseMenu} />
       </div>
 
       <div className="flex-1 md:w-full p-8">

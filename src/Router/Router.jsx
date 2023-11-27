@@ -19,6 +19,7 @@ import ManageCamps from "../Pages/DashBoard/ManageCamps/ManageCamps";
 import UpdateCamp from "../Pages/DashBoard/UpdateCamp/UpdateCamp";
 import Payment from "../Pages/DashBoard/Payment/Payment";
 import PaymentHistory from "../Pages/DashBoard/PaymentHistory/paymentHistory";
+import ParticipantInfo from "../Pages/DashBoard/ParticipantInfo/ParticipantInfo";
 
 
 
@@ -88,12 +89,17 @@ export const router = createBrowserRouter([
                 element:<UpdateCamp></UpdateCamp>
             },
             {
-                path:'payment',
+                path:'payment/:id',
                 element:<Payment></Payment>
             },
             {
                 path:'paymentHistory',
                 element:<PaymentHistory></PaymentHistory>
+            },
+            {
+                path:'participantInfo',
+                element:<ParticipantInfo></ParticipantInfo>,
+                loader:(()=>fetch('http://localhost:5008/registerInfo'))
             },
     ]
     }

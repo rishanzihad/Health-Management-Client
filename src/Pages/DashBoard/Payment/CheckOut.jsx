@@ -5,29 +5,35 @@ import { useContext, useEffect, useState } from "react";
 
 import Swal from "sweetalert2";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useCart from "../../Hooks/useCart";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 
 const CheckOut = () => {
+
     const [error, setError] = useState('');
     const [transactionId, setTransactionId] = useState('');
     const [clientSecret, setClientSecret] = useState('')
     const axiosSecure = useAxiosSecure();
     const [cart, refetch] = useCart();
-    const {user}=useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const stripe = useStripe();
     const elements = useElements();
-    const navigate =useNavigate()
-    const totalFees = cart.reduce((total, item) => total + parseFloat(item.fees), 0)
-    console.log(totalFees)
+    const navigate = useNavigate()
+    const { id } = useParams()
+
+    const getCard = cart.find((item) => item._id === id);
+    const totalFees = getCard?.fees ? parseFloat(getCard.fees) : 0;
+
+
     useEffect(() => {
         if (totalFees > 0) {
+         
             axiosSecure.post('/create-payment-intent', { fees: totalFees })
                 .then(res => {
-                    console.log(res.data.clientSecret);
+                   
                     setClientSecret(res.data.clientSecret);
                 })
         }
@@ -54,18 +60,18 @@ const CheckOut = () => {
 
         if (error) {
             console.log('payment error', error);
-    
+
         }
         else {
             console.log('payment method', paymentMethod)
-  
+
         }
-        const {paymentIntent,error:confirmError}=await stripe.confirmCardPayment(clientSecret,{
-            payment_method:{
-                card:card,
-                billing_details:{
-                    email:user?.email||"Anonymous",
-                    name:user?.displayName ||"Anonymous"
+        const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    email: user?.email || "Anonymous",
+                    name: user?.displayName || "Anonymous"
                 }
             }
         })
@@ -76,32 +82,33 @@ const CheckOut = () => {
             console.log('payment intent', paymentIntent)
             if (paymentIntent.status === 'succeeded') {
                 console.log('transaction id', paymentIntent.id);
-                setTransactionId(paymentIntent.id);}
+                setTransactionId(paymentIntent.id);
+            }
 
-                const payment = {
-                    email: user.email,
-                    fees: totalFees,
-                    transactionId: paymentIntent.id,
-                    date: new Date(), // utc date convert. use moment js to 
-                    cartIds: cart.map(item => item._id),
-                    menuItemIds: cart.map(item => item.menuId),
-                    status: 'pending'
-                }
-                const res = await axiosSecure.post('/payments', payment);
-                console.log('payment saved', res.data);
-                refetch();
-                if (res.data?.paymentResult?.insertedId) {
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Thank you for the taka paisa",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    navigate('/dashboard/paymentHistory')
-                }
+            const payment = {
+                email: user.email,
+                fees: totalFees,
+                transactionId: paymentIntent.id,
+                date: new Date(), // utc date convert. use moment js to 
+                cartIds: getCard._id,
+                campItemIds: getCard.camp_id,
+                status: 'pending'
+            }
+            const res = await axiosSecure.post('/payments', payment);
+            console.log('payment saved', res.data);
+            refetch();
+            if (res.data?.paymentResult?.insertedId) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `Thank you for Join Camp `,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate('/dashboard/paymentHistory')
+            }
         }
-       
+
 
 
     }
@@ -124,7 +131,7 @@ const CheckOut = () => {
                     },
                 }}
             />
-            <button className="btn btn-sm btn-primary my-4" type="submit" disabled={!stripe ||!clientSecret }>
+            <button className="btn btn-sm btn-primary my-4" type="submit" disabled={!stripe || !clientSecret}>
                 Pay
             </button>
             <p className="text-red-600">{error}</p>
