@@ -37,7 +37,7 @@ const DetailCard = ({ camp }) => {
                     <div className="p-6 rounded-b-xl bg-gradient-to-tr from-orange-400 to-red-300">
                         <div className="flex justify-around">
                             <h5 className="block mb-2 text-3xl font-semibold font-sans md:text-4xl antialiased  leading-snug tracking-normal text-blue-gray-900">
-                                Name:{name}
+                               {name}
                             </h5>
 
                         </div>
@@ -78,8 +78,8 @@ const DetailCard = ({ camp }) => {
                                 </h1>
 
                             </div>
-                            <p className="block font-sans font-bold text-base antialiased  leading-relaxed text-inherit">
-                                <span className=" text-gray-500">DesCription:{comprehensiveDescription}</span>
+                            <p className="block font-sans mt-2 mb-3 font-bold text-base antialiased  leading-relaxed text-inherit">
+                                <span className=" text-gray-500"><span className="text-black font-bold">DesCription:</span>{comprehensiveDescription}</span>
                             </p>
 
                         </div>

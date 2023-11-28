@@ -32,25 +32,26 @@ const AvailableCamp = () => {
       <Helmet>
         <title>Medical Camp || Available</title>
       </Helmet>
+      .
       <div>
         <h1 className="text-4xl font-bold mt-20 text-white flex underline justify-center">
           Available Camps
         </h1>
         <div className="grid grid-cols-1 gap-5 mt-10">
-          {/* Search Bar */}
+    
           <input
             type="text"
             placeholder="Search camps..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="p-2 border rounded"
+            className=" border-white input "
           />
 
      
           <select
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value)}
-            className="mt-3 p-2 border rounded"
+            className="mt-3  border-white input"
           >
             <option value="mostRegistered">Most Registered</option>
             <option value="targetAudience">Target Audience</option>

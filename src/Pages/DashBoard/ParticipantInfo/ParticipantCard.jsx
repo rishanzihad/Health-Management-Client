@@ -3,11 +3,12 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
 const ParticipantCard = ({ regi }) => {
   const axiosSecure = useAxiosSecure();
 
-  const { name,campName, email, phone, gender, healthInfo, emergencyContact } = regi;
+  const { _id,name,campName, email, phone, gender, healthInfo, emergencyContact } = regi;
   const { data: payment = [],refetch } = useQuery({
     queryKey: ['payment'],
     queryFn: async () => {
@@ -19,7 +20,7 @@ const ParticipantCard = ({ regi }) => {
 
   const participantPayment = payment.find((pay) => pay.email === email);
   
-  //console.log(participantPayment)
+
 const handleStatus =()=>{
     axiosSecure.patch(`/payment/${participantPayment?._id}`)
     .then(res =>{
@@ -29,6 +30,32 @@ const handleStatus =()=>{
           toast.success(`${participantPayment.name}Participant Status Approved`)
         }
     })
+}
+const handleRegister =(_id)=>{
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, Decline it!"
+}).then((result) => {
+    if (result.isConfirmed) {
+
+        axiosSecure.delete(`/registerInfo/${_id}`)
+            .then(res => {
+                if (res.data.deletedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                }
+            })
+    }
+});
 }
   return (
     <div>
@@ -45,10 +72,17 @@ const handleStatus =()=>{
 
           <div className="card-actions justify-end">
             {participantPayment ? (
-              <button onClick={() => handleStatus(participantPayment?._id)} className="btn btn-primary w-full">{participantPayment.status}</button>
+           
+                <button onClick={() => handleStatus(participantPayment?._id)} className="btn btn-primary w-full">{participantPayment?.status}</button>
+             
             ) : (
               <p>No payment information available</p>
             )}
+            {
+              participantPayment?.status == 'Approved'? (''):
+              (<button onClick={()=>handleRegister(_id)} className='btn bg-red-500 text-white w-full'>Cancel Registration
+              </button>)
+              }
           </div>
         </div>
       </div>
