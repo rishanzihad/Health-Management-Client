@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const CampCard = ({camp}) => {
   const {user}=useContext(AuthContext)
-  const {_id,organizers,name,image,fees,scheduledDate,scheduledTime,location,specializedServices,healthcareProfessionals,targetAudience, comprehensiveDescription}=camp
+  const {_id,organizers,name,image,fees,scheduledDate,scheduledTime,location,specializedServices,healthcareProfessionals,targetAudience, comprehensiveDescription,participant}=camp
     return (
         <div className='md:flex'>
            <div className='md:w-2/3'>
@@ -112,7 +112,7 @@ const CampCard = ({camp}) => {
           </svg>
         </span>
         <p className="block font-sans text-base antialiased font-normal leading-relaxed text-inherit">
-        <span className='font-bold'>Participants: </span>10
+        <span className='font-bold'>Participants: </span>{participant}
         </p>
       </li>:''
       }

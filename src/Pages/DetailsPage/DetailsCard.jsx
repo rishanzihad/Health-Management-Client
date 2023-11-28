@@ -90,6 +90,11 @@ const DetailCard = ({ camp }) => {
                             <button onClick={openModal} className="btn bg-red-500 w-full text-white">
                                 Join Camp
                             </button>
+                            <Link to='/availableCamp'>
+                            <button className="btn mt-5 bg-green-500 w-full text-white">
+                            See All Camps
+                            </button>
+                            </Link>
                         </div>
                         <RegistrationModal
                             isOpen={isModalOpen}

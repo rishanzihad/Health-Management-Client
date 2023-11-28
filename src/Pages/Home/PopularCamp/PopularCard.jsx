@@ -11,9 +11,12 @@ const PopularCard = ({camp}) => {
      {name}
 
     </h2>
+    <p>Camp Fees:{fees}</p>
+    
     <p>Participant:{participant}</p>
+    
     <div className=" w-full py-2 px-6 pt-0">
-  <Link className="btn bg-yellow-300 w-full" to={`/details/${_id}`}> <button >Details</button></Link>
+  <Link className="btn bg-yellow-300 w-full text-white" to={`/details/${_id}`}> <button >Details</button></Link>
   </div>
   </div>
 </div>

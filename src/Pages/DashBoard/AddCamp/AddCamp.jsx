@@ -22,7 +22,7 @@ const AddCamp = () => {
            if(res.data.success){
             const formData = {
                 participant:data.participant,
-                organizers:user.displayName,
+                organizers:data.organizers,
                 name: data.name,
                 image: res.data.data.display_url,
                 fees: data.fees,
@@ -58,7 +58,12 @@ const AddCamp = () => {
                     </label>
                     <input required type="text" {...register('name', { required: true })} placeholder="Camp Name" className="input input-bordered w-full " />
                 </div>
-
+                <div className="form-control w-full my-6">
+                    <label className="label">
+                        <span className="label-text">Organizer Name</span>
+                    </label>
+                    <input    required type="text" {...register('organizers', { required: true })} placeholder="Organizer" className="input input-bordered w-full " />
+                </div>
                 <div className="form-control w-full my-6">
                     <label className="label">
                         <span className="label-text">Camp Image</span>

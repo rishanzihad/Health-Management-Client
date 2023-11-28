@@ -86,7 +86,8 @@ export const router = createBrowserRouter([
             },
             {
                 path:'updateCamp/:id',
-                element:<UpdateCamp></UpdateCamp>
+                element:<UpdateCamp></UpdateCamp>,
+                loader: ({params}) => fetch(`http://localhost:5008/camps/${params.id}`)
             },
             {
                 path:'payment/:id',
