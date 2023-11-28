@@ -54,11 +54,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/availableCamp',
-                element:<AvailableCamp></AvailableCamp>
+                element:<PrivateRoute><AvailableCamp></AvailableCamp></PrivateRoute>
             },
             {
                 path: '/details/:id',
-                element: <DetailsPage></DetailsPage>,
+                element:<PrivateRoute> <DetailsPage></DetailsPage></PrivateRoute>,
                
 
             },
@@ -66,7 +66,7 @@ export const router = createBrowserRouter([
     },
     {
         path:"dashboard",
-        element:<Dashboard></Dashboard>,
+        element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children:[
             {
                 path:'addCamp',
@@ -94,20 +94,20 @@ export const router = createBrowserRouter([
             },
             {
                 path:'updateCamp/:id',
-                element:<UpdateCamp></UpdateCamp>,
+                element:<AdminRoute><UpdateCamp></UpdateCamp></AdminRoute>,
                 loader: ({params}) => fetch(`http://localhost:5008/camps/${params.id}`)
             },
             {
                 path:'payment/:id',
-                element:<Payment></Payment>
+                element:<PrivateRoute></PrivateRoute>
             },
             {
                 path:'paymentHistory',
-                element:<PaymentHistory></PaymentHistory>
+                element:<PrivateRoute><PaymentHistory></PaymentHistory></PrivateRoute>
             },
             {
                 path:'participantInfo',
-                element:<ParticipantInfo></ParticipantInfo>,
+                element:<AdminRoute><ParticipantInfo></ParticipantInfo></AdminRoute>,
                 loader:(()=>fetch('http://localhost:5008/registerInfo'))
             },
     ]
