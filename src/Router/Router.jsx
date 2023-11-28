@@ -21,6 +21,8 @@ import Payment from "../Pages/DashBoard/Payment/Payment";
 import PaymentHistory from "../Pages/DashBoard/PaymentHistory/paymentHistory";
 import ParticipantInfo from "../Pages/DashBoard/ParticipantInfo/ParticipantInfo";
 import ProfileManagement from "../Pages/DashBoard/ProfileManagement\"/ProfileManagement";
+import PrivateRoute from "../Pages/PrivateRoute/PrivateRoute";
+import AdminRoute from "../Pages/PrivateRoute/AdminRoute";
 
 
 
@@ -68,27 +70,27 @@ export const router = createBrowserRouter([
         children:[
             {
                 path:'addCamp',
-                element:<AddCamp></AddCamp>
+                element:<AdminRoute><AddCamp></AddCamp></AdminRoute>
             },
             {
                 path:'ProfileManagement',
-                element:<ProfileManagement></ProfileManagement>
+                element:<PrivateRoute><ProfileManagement></ProfileManagement></PrivateRoute>
             },
             {
                 path:'users',
-                element:<AllUsers></AllUsers>
+                element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
             {
                 path:'contactUser',
-                element:<ContactUser></ContactUser>
+                element:<AdminRoute><ContactUser></ContactUser></AdminRoute>
             },
             {
                 path:'carts',
-                element:<JoinCampCart></JoinCampCart>
+                element:<AdminRoute><JoinCampCart></JoinCampCart></AdminRoute>
             },
             {
                 path:'manageCamps',
-                element:<ManageCamps></ManageCamps>
+                element:<AdminRoute><ManageCamps></ManageCamps></AdminRoute>
             },
             {
                 path:'updateCamp/:id',

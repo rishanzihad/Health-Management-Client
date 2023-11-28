@@ -9,6 +9,7 @@ const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTE;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const ProfileManagement = () => {
+
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const { user } = useContext(AuthContext);
@@ -41,16 +42,23 @@ const ProfileManagement = () => {
 
     
        if(res.data.success){
-        const updateUserData ={
-            name:data.name,
-            image: res.data.data.display_url,
+      
+           
+     const updateUserData ={
+             image: res.data.data.display_url,
+              name:data.name,
         }
-        const updateRes =await axiosSecure.patch(`/user/:${participantData?._id}`,updateUserData)
+        const email = user.email;
+const updateUserUrl = `http://localhost:5008/users/${email}`;
+
+
+
+        const updateRes =await axiosSecure.patch(updateUserUrl,updateUserData)
         if(updateRes.data.modifiedCount > 0){
             reset()
             Swal.fire({
                 position:'top-end',
-                title: `${data.name} is added to the Camp Collection`,
+                title: `${data.name} is Update Profile SuccessFul`,
                showConfirmButton: false,
                timer: 1500
               })
