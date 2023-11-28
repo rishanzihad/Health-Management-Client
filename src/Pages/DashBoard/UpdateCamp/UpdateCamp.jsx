@@ -4,7 +4,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTE;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const UpdateCamp = () => {
 
@@ -35,7 +35,7 @@ const UpdateCamp = () => {
                 healthcareProfessionals:data.healthcareProfessionals,
                  comprehensiveDescription:data.comprehensiveDescription, 
                  fees:parseFloat(data.fees),
-                  image:data.image,
+                  image:res.data.data.display_url,
                    location:data.location,
             }
               

@@ -20,6 +20,8 @@ import UpdateCamp from "../Pages/DashBoard/UpdateCamp/UpdateCamp";
 import Payment from "../Pages/DashBoard/Payment/Payment";
 import PaymentHistory from "../Pages/DashBoard/PaymentHistory/paymentHistory";
 import ParticipantInfo from "../Pages/DashBoard/ParticipantInfo/ParticipantInfo";
+import ProfileManagement from "../Pages/DashBoard/ProfileManagement\"/ProfileManagement";
+
 
 
 
@@ -67,6 +69,10 @@ export const router = createBrowserRouter([
             {
                 path:'addCamp',
                 element:<AddCamp></AddCamp>
+            },
+            {
+                path:'ProfileManagement',
+                element:<ProfileManagement></ProfileManagement>
             },
             {
                 path:'users',

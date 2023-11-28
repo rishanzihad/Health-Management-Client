@@ -72,8 +72,8 @@ const DropdownMenu = ({ isAdmin,isHealthcareProfessionals,  isMenuOpen, closeMen
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/history">
-              <FaCalendar></FaCalendar> not Payment History
+            <NavLink to="/dashboard/ProfileManagement">
+              <FaCalendar></FaCalendar>Profile Management
             </NavLink>
           </li>
           <li>
@@ -88,7 +88,7 @@ const DropdownMenu = ({ isAdmin,isHealthcareProfessionals,  isMenuOpen, closeMen
           </li>
           <li>
             <NavLink to="/dashboard/paymentHistory">
-              <FaList></FaList> Real Payment History
+              <FaList></FaList>Payment History
             </NavLink>
           </li>
         </>
