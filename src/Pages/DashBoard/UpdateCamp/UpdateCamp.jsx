@@ -13,7 +13,7 @@ const UpdateCamp = () => {
     const axiosSecure = useAxiosSecure();
     const camp = useLoaderData()
   
-    const { name,organizers,participant,scheduledDate,scheduledTime,specializedServices,targetAudience ,healthcareProfessionals, comprehensiveDescription, fees, image, location, recipe, price, _id } = useLoaderData();
+    const { name,organizers,participant,scheduledDate,scheduledTime,specializedServices,targetAudience ,healthcareProfessionals, comprehensiveDescription, fees, image, location,  _id } = camp;
     const onSubmit = async (data) => {
       
         // image upload to imgbb and then get an url
@@ -23,10 +23,12 @@ const UpdateCamp = () => {
             headers: {
                 'content-type': 'multipart/form-data'
             }
-        });
+        }); 
+        if (res.data.success) {
             // now send the menu item data to the server with the image url
-            const camp ={ name:data.name,
-                organizers:data. organizers,
+            const campa ={ name:data.name,
+                image: res.data.data.display_url,
+                organizers:data.organizers,
                 participant:parseFloat(data.participant),
                 scheduledDate:data.scheduledDate,
                 scheduledTime:data.scheduledTime,
@@ -35,26 +37,30 @@ const UpdateCamp = () => {
                 healthcareProfessionals:data.healthcareProfessionals,
                  comprehensiveDescription:data.comprehensiveDescription, 
                  fees:parseFloat(data.fees),
-                  image:res.data.data.display_url,
+                 
                    location:data.location,
             }
-              
-         
-            const campRes = await axiosSecure.patch(`/camps/${_id}`, camp);
+            console.log(campa)
+            const campRes = await axiosSecure.patch(`/camps/${_id}`, campa);
             console.log(campRes.data)
             if(campRes.data.modifiedCount > 0){
-                // show success popup
+                //show success popup
                 // reset();
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: `${data.name} is updated to the menu.`,
+                    title: `${data.name} is updated to Camp.`,
                     showConfirmButton: false,
                     timer: 1500
                   });
             }
+        }
+      
+              
+         
+            
         
-        console.log( 'with image url', res.data);
+        
     };
     return (
         <div className='flex justify-center'>
@@ -76,7 +82,7 @@ const UpdateCamp = () => {
                     <label className="label">
                         <span className="label-text">Camp Image</span>
                     </label>
-                    <input  {...register('image', { required: true })} type="file" className="file-input w-full" />
+                    <input  {...register('image')} type="file" className="file-input w-full" />
                 </div>
 
                 <div className="form-control w-full my-6">
