@@ -24,6 +24,7 @@ import ProfileManagement from "../Pages/DashBoard/ProfileManagement\"/ProfileMan
 import PrivateRoute from "../Pages/PrivateRoute/PrivateRoute";
 import AdminRoute from "../Pages/PrivateRoute/AdminRoute";
 import FeedBack from "../Pages/DashBoard/FeedBack/FeedBack";
+import UpComingCamp from "../Pages/DashBoard/UpComingCamp/UpComingCamp";
 
 
 
@@ -99,6 +100,11 @@ export const router = createBrowserRouter([
                 path:'addCamp',
                 element:<AdminRoute><AddCamp></AddCamp></AdminRoute>
             },
+            {
+                path:'UpComingCamp',
+                element:<AdminRoute><UpComingCamp></UpComingCamp></AdminRoute>
+            },
+            
             
             {
                 path:'users',

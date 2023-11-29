@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 const ParticipantCard = ({ regi }) => {
   const axiosSecure = useAxiosSecure();
 
-  const { _id,name,campName, email, phone, gender, healthInfo, emergencyContact } = regi;
+  const { _id,name,campName, email, phone, gender, healthInfo, emergencyContact,paymentId } = regi;
   const { data: payment = [],refetch } = useQuery({
     queryKey: ['payment'],
     queryFn: async () => {
@@ -17,9 +17,10 @@ const ParticipantCard = ({ regi }) => {
       return res.data;
     },
   });
+  console.log(paymentId)
 
-  const participantPayment = payment.find((pay) => pay.email === email);
- 
+  const participantPayment = payment.find((pay) => pay._id === paymentId);
+ console.log(participantPayment)
 
 const handleStatus =()=>{
     axiosSecure.patch(`/payment/${participantPayment?._id}`)

@@ -4,10 +4,11 @@ import { useContext } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import toast from "react-hot-toast";
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTE;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
-const AddCamp = () => {
+const UpComingCamp = () => {
     const {user}=useContext(AuthContext)
     const axiosPublic = useAxiosPublic();
     const { handleSubmit, register,reset, formState: { errors } } = useForm();
@@ -21,7 +22,7 @@ const AddCamp = () => {
            })
            if(res.data.success){
             const formData = {
-                participant:data.participant,
+                
                 organizers:data.organizers,
                 name: data.name,
                 image: res.data.data.display_url,
@@ -34,19 +35,14 @@ const AddCamp = () => {
                 targetAudience: data.targetAudience,
                 comprehensiveDescription: data.comprehensiveDescription,
             };
-            console.log(formData)
-            const campRes =await axiosSecure.post('/camps',formData)
-        if(campRes.data.insertedId){
+      
+            const UpComingRes =await axiosSecure.post('/upcomingcamps',formData)
+        if(UpComingRes.data.insertedId){
             reset()
-            Swal.fire({
-                position:'top-end',
-                title: `${data.name} is added to the Camp Collection`,
-               showConfirmButton: false,
-               timer: 1500
-              })
+           toast.success(`${data.name} is added to the Camp Collection`)
         }
         }
-        console.log(res.data)
+      
     };
 
     return (
@@ -116,20 +112,7 @@ const AddCamp = () => {
                         className="input input-bordered w-full"
                     />
                 </div>
-                <div className="form-control w-full my-6">
-                    <label className="label">
-                        <span className="label-text">Participant</span>
-                    </label>
-                    <input
-                    
-                    defaultValue={0}
-                        required
-                        type="number"
-                        {...register('participant', { required: true })}
-                        placeholder="Participant"
-                        className="input input-bordered w-full"
-                    />
-                </div>
+               
 
                 <div className="form-control w-full my-6">
                     <label className="label">
@@ -194,4 +177,4 @@ const AddCamp = () => {
     );
 };
 
-export default AddCamp;
+export default UpComingCamp;

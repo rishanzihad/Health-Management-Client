@@ -46,6 +46,11 @@ const DropdownMenu = ({ isAdmin,isUser,isHealthcareProfessionals,  isMenuOpen, c
             </NavLink>
           </li>
           <li>
+            <NavLink to="/dashboard/UpComingCamp">
+              <IoMdAddCircleOutline /> Add Up Coming Camp
+            </NavLink>
+          </li>
+          <li>
             <NavLink to="/dashboard/manageCamps">
               <FaList></FaList> Manage Camps
             </NavLink>
