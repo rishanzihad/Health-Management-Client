@@ -5,35 +5,35 @@ const FeedBAckCard = ({ participantCamp }) => {
     const [camps] = useCamp()
     let matchedCamp;
     matchedCamp = camps.find(camp => camp?._id == participantCamp?.campItemIds);
-    
-    if (matchedCamp) {
-      const { scheduledDate, location } = matchedCamp;
- 
-    } else {
-      
-      console.error("matchedCamp is undefined");
-    }
-    
-const handleFeedBack =()=>{
 
-}
-    return(
-    
+    if (matchedCamp) {
+        const { scheduledDate, location } = matchedCamp;
+
+    } else {
+
+        console.error("matchedCamp is undefined");
+    }
+
+    const handleFeedBack = e => {
+        e.preventDefault()
+        const form =e.target 
+        const feedback =form.feedback.value 
+        console.log(feedback)
+    }
+    return (
+
 
         <div className="overflow-x-auto">
             <table className="table table-zebra">
-                {/* head */}
+
                 <thead>
                     <tr>
-
                         <th className='text-center'>Camp Name</th>
                         <th className='text-center'>FeedBack</th>
                         <th className='text-center'>Fees</th>
                         <th className='text-center'>Transaction Id</th>
                         <th className='text-center'>Status</th>
                         <th className='text-center'>Venue</th>
-
-
                     </tr>
                 </thead>
                 <tbody>
@@ -46,11 +46,11 @@ const handleFeedBack =()=>{
 
                                     <textarea
                                         required
-
+                                        name='feedback'
                                         placeholder="FeedBack"
                                         className="textarea w-min-[400px] textarea-bordered "
                                     />
-                                    <button className='btn bg-green-400 text-white mt-1'> Submit</button>
+                                    <button type='submit' className='btn bg-green-400 text-white mt-1'> Submit</button>
                                 </div>
                             </form>
                         </td>
