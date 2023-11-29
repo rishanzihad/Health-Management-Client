@@ -66,16 +66,33 @@ export const router = createBrowserRouter([
     },
     {
         path:"dashboard",
-        element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        element:<Dashboard></Dashboard>,
         children:[
             {
-                path:'addCamp',
-                element:<AdminRoute><AddCamp></AddCamp></AdminRoute>
+                path:'userHome',
+          
+            },
+            {
+                path:'payment/:id',
+                element:<PrivateRoute><Payment></Payment></PrivateRoute>
+            },
+            {
+                path:'paymentHistory',
+                element:<PrivateRoute><PaymentHistory></PaymentHistory></PrivateRoute>
+            },
+            {
+                path:'carts',
+                element:<PrivateRoute><JoinCampCart></JoinCampCart></PrivateRoute>
             },
             {
                 path:'ProfileManagement',
                 element:<PrivateRoute><ProfileManagement></ProfileManagement></PrivateRoute>
             },
+            {
+                path:'addCamp',
+                element:<AdminRoute><AddCamp></AddCamp></AdminRoute>
+            },
+            
             {
                 path:'users',
                 element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
@@ -84,10 +101,7 @@ export const router = createBrowserRouter([
                 path:'contactUser',
                 element:<AdminRoute><ContactUser></ContactUser></AdminRoute>
             },
-            {
-                path:'carts',
-                element:<AdminRoute><JoinCampCart></JoinCampCart></AdminRoute>
-            },
+           
             {
                 path:'manageCamps',
                 element:<AdminRoute><ManageCamps></ManageCamps></AdminRoute>
@@ -97,14 +111,7 @@ export const router = createBrowserRouter([
                 element:<AdminRoute><UpdateCamp></UpdateCamp></AdminRoute>,
                 loader: ({params}) => fetch(`http://localhost:5008/camps/${params.id}`)
             },
-            {
-                path:'payment/:id',
-                element:<PrivateRoute></PrivateRoute>
-            },
-            {
-                path:'paymentHistory',
-                element:<PrivateRoute><PaymentHistory></PaymentHistory></PrivateRoute>
-            },
+           
             {
                 path:'participantInfo',
                 element:<AdminRoute><ParticipantInfo></ParticipantInfo></AdminRoute>,

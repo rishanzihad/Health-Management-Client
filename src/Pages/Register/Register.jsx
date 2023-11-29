@@ -63,6 +63,7 @@ const Register = () => {
                         email,
                         password,
                         image,
+                        role:'user'
                         
                     }
                     console.log(userInfo)
