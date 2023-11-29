@@ -23,6 +23,7 @@ import ParticipantInfo from "../Pages/DashBoard/ParticipantInfo/ParticipantInfo"
 import ProfileManagement from "../Pages/DashBoard/ProfileManagement\"/ProfileManagement";
 import PrivateRoute from "../Pages/PrivateRoute/PrivateRoute";
 import AdminRoute from "../Pages/PrivateRoute/AdminRoute";
+import FeedBack from "../Pages/DashBoard/FeedBack/FeedBack";
 
 
 
@@ -77,6 +78,10 @@ export const router = createBrowserRouter([
             {
                 path:'payment/:id',
                 element:<PrivateRoute><Payment></Payment></PrivateRoute>
+            },
+            {
+                path:'feedback-and-ratings',
+                element:<PrivateRoute><FeedBack></FeedBack></PrivateRoute>
             },
             {
                 path:'paymentHistory',

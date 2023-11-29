@@ -81,6 +81,7 @@ const DropdownMenu = ({ isAdmin,isUser,isHealthcareProfessionals,  isMenuOpen, c
                 <FaCalendar></FaCalendar>Profile Management
               </NavLink>
             </li>
+           
             
            
           <li>
@@ -96,6 +97,11 @@ const DropdownMenu = ({ isAdmin,isUser,isHealthcareProfessionals,  isMenuOpen, c
             <li>
               <NavLink to="/dashboard/paymentHistory">
                 <FaList></FaList>Payment History
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/feedback-and-ratings">
+                <FaCalendar></FaCalendar>FeedBack and Ratings
               </NavLink>
             </li>
           </>

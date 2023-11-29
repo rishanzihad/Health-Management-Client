@@ -92,7 +92,8 @@ const CheckOut = () => {
                 date: new Date(), // utc date convert. use moment js to 
                 cartIds: getCard._id,
                 campItemIds: getCard.camp_id,
-                status: 'pending'
+                campName: getCard.campName,
+                status: 'Pending'
             }
             const res = await axiosSecure.post('/payments', payment);
             console.log('payment saved', res.data);
