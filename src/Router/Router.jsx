@@ -72,6 +72,8 @@ export const router = createBrowserRouter([
                 path:'userHome',
           
             },
+          
+           
             {
                 path:'payment/:id',
                 element:<PrivateRoute><Payment></Payment></PrivateRoute>

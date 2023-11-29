@@ -60,6 +60,7 @@ const DropdownMenu = ({ isAdmin,isUser,isHealthcareProfessionals,  isMenuOpen, c
               <FaBook></FaBook> Participant Info
             </NavLink>
           </li>
+          
           <li>
             <NavLink to="/dashboard/users">
               <FaUser></FaUser> All Users
@@ -80,10 +81,12 @@ const DropdownMenu = ({ isAdmin,isUser,isHealthcareProfessionals,  isMenuOpen, c
                 <FaCalendar></FaCalendar>Profile Management
               </NavLink>
             </li>
-            <li>
+            
+           
+          <li>
               <NavLink to="/dashboard/carts">
                 <FaShoppingCart></FaShoppingCart>
-                Join Camp Cart ({cart.length})</NavLink>
+                Register Camp ({cart.length})</NavLink>
             </li>
             <li>
               <NavLink to="/dashboard/review">

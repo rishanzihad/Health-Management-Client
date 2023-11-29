@@ -19,7 +19,7 @@ const ParticipantCard = ({ regi }) => {
   });
 
   const participantPayment = payment.find((pay) => pay.email === email);
-  
+ 
 
 const handleStatus =()=>{
     axiosSecure.patch(`/payment/${participantPayment?._id}`)
