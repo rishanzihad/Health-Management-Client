@@ -5,7 +5,7 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 
-const ParticipantCard = ({ regi }) => {
+const ParticipantCard = ({ regi ,handleRegister}) => {
   const axiosSecure = useAxiosSecure();
 
   const { _id,name,campName, email, phone, gender, healthInfo, emergencyContact,paymentId } = regi;
@@ -32,32 +32,7 @@ const handleStatus =()=>{
         }
     })
 }
-const handleRegister =(_id)=>{
-  Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, Decline it!"
-}).then((result) => {
-    if (result.isConfirmed) {
 
-        axiosSecure.delete(`/registerInfo/${_id}`)
-            .then(res => {
-                if (res.data.deletedCount > 0) {
-                    refetch();
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "Your file has been deleted.",
-                        icon: "success"
-                    });
-                }
-            })
-    }
-});
-}
   return (
     <div>
       <div className="card  bg-base-100 shadow-xl">
@@ -79,11 +54,13 @@ const handleRegister =(_id)=>{
             ) : (
               <p>No payment information available</p>
             )}
-            {
-              participantPayment?.status == 'Approved'? (''):
-              (<button onClick={()=>handleRegister(_id)} className='btn bg-red-500 text-white w-full'>Cancel Registration
-              </button>)
-              }
+           {participantPayment?.status === 'Approved' ? (
+              ''
+            ) : (
+              <button onClick={() => handleRegister(_id)} className="btn bg-red-500 text-white w-full">
+                Cancel Registration
+              </button>
+            )}
           </div>
         </div>
       </div>

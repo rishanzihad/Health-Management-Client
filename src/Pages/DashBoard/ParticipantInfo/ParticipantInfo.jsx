@@ -4,6 +4,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useLoaderData } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import ParticipantCard from "./ParticipantCard";
+import Swal from "sweetalert2";
 
 
 const ParticipantInfo = () => {
@@ -18,7 +19,32 @@ const ParticipantInfo = () => {
         }
       });
   
-
+      const handleRegister =(_id)=>{
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, Decline it!"
+      }).then((result) => {
+          if (result.isConfirmed) {
+      
+              axiosSecure.delete(`/registerInfo/${_id}`)
+                  .then(res => {
+                      if (res.data.deletedCount > 0) {
+                          refetch();
+                          Swal.fire({
+                              title: "Deleted!",
+                              text: "Your file has been deleted.",
+                              icon: "success"
+                          });
+                      }
+                  })
+          }
+      });
+      }
       
       
        
@@ -30,7 +56,7 @@ const ParticipantInfo = () => {
             </div>
           <div className="grid md:grid-cols-2 gap-4">
           {
-                register.map(regi =><ParticipantCard key={regi._id} regi={regi}></ParticipantCard>)
+                register.map(regi =><ParticipantCard handleRegister={handleRegister}  key={regi._id} regi={regi}></ParticipantCard>)
             }
           </div>
         </div>
