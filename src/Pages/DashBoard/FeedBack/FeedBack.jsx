@@ -39,9 +39,9 @@ const FeedBack = () => {
                 <h2 className="text-3xl">Total Camp  Register </h2>
 
             </div>
-            <div className="grid md:grid-cols-2 gap-4">
-                {
-                    <FeedBAckCard participantCamp={participantCamp}></FeedBAckCard>
+            <div >
+                {participantCamp &&(
+                    <FeedBAckCard participantCamp={participantCamp}></FeedBAckCard>)
                 }
             </div>
         </div>
