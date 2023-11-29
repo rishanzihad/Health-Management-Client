@@ -1,24 +1,42 @@
 import React from 'react';
 import useCamp from '../../Hooks/useCamp';
 
+import toast from 'react-hot-toast';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+
 const FeedBAckCard = ({ participantCamp }) => {
     const [camps] = useCamp()
+    const axiosSecure =useAxiosSecure()
     let matchedCamp;
     matchedCamp = camps.find(camp => camp?._id == participantCamp?.campItemIds);
 
     if (matchedCamp) {
-        const { scheduledDate, location } = matchedCamp;
+        const { campName,scheduledDate, location } = matchedCamp;
 
     } else {
 
         console.error("matchedCamp is undefined");
     }
 
-    const handleFeedBack = e => {
+    const handleFeedBack = async(e) => {
         e.preventDefault()
         const form =e.target 
         const feedback =form.feedback.value 
-        console.log(feedback)
+        const feedbackForm ={
+            campName:participantCamp.campName,
+            feedback,
+            date:matchedCamp?.scheduledDate
+        }
+        const feedRes =await axiosSecure.post('/feedback',feedbackForm)
+        if(feedRes.data.insertedId){
+          
+            form.reset()
+            toast.success(`FeedBack Submit`)
+            
+        }
+        
+
+       
     }
     return (
 

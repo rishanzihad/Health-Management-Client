@@ -2,6 +2,7 @@ import { Outlet, useLocation } from "react-router-dom";
 
 import { Toaster } from "react-hot-toast";
 import NavBar from "../Shared/NavBar/NavBar";
+import Footer from "../Shared/Footer/Footer";
 
 
 
@@ -14,7 +15,7 @@ const MainLayOut = () => {
             {noHeaderFooter ||   <NavBar></NavBar>}
      
            <Outlet></Outlet>
-          
+           {noHeaderFooter ||   <Footer></Footer>}
          
             <Toaster/>
         </div>
