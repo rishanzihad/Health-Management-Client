@@ -1,14 +1,15 @@
+
 import { useContext } from 'react';
-import { AuthContext } from '../../../AuthProvider/AuthProvider';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { AuthContext } from '../../../AuthProvider/AuthProvider';
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTE;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddHealthTips = () => {
-    const {user}=useContext(AuthContext)
+    const{user}=useContext(AuthContext)
     const axiosPublic = useAxiosPublic();
     const { handleSubmit, register,reset, formState: { errors } } = useForm();
     const axiosSecure =useAxiosSecure()
@@ -21,7 +22,8 @@ const AddHealthTips = () => {
            })
            if(res.data.success){
             const formData = {
-             
+                userImage:user.photoURL,
+                userName:user.displayName,
                 organizers:data.organizers,
                 name: data.name,
                 image: res.data.data.display_url,
@@ -32,8 +34,8 @@ const AddHealthTips = () => {
                 description: data.description,
             };
             console.log(formData)
-            const campRes =await axiosSecure.post('/camps',formData)
-        if(campRes.data.insertedId){
+            const TipsRes =await axiosSecure.post('/healthTips',formData)
+        if(TipsRes.data.insertedId){
             reset()
             toast.success(`${data.name} is added to the HealthTips Collection`)
         }
@@ -45,9 +47,9 @@ const AddHealthTips = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control w-full my-6">
                     <label className="label">
-                        <span className="label-text">Camp Name</span>
+                        <span className="label-text">Tittle</span>
                     </label>
-                    <input required type="text" {...register('name', { required: true })} placeholder="Camp Name" className="input input-bordered w-full " />
+                    <input required type="text" {...register('name', { required: true })} placeholder="Title" className="input input-bordered w-full " />
                 </div>
                
                 <div className="form-control w-full my-6">
@@ -56,13 +58,6 @@ const AddHealthTips = () => {
                     </label>
                     <input required {...register('image', { required: true })} type="file" className="file-input w-full" />
                 </div>
-
-               
-
-              
-
-               
-
                 <div className="form-control w-full my-6">
                     <label className="label">
                         <span className="label-text">Author</span>

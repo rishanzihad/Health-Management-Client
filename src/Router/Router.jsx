@@ -26,6 +26,7 @@ import AdminRoute from "../Pages/PrivateRoute/AdminRoute";
 import FeedBack from "../Pages/DashBoard/FeedBack/FeedBack";
 import UpComingCamp from "../Pages/DashBoard/UpComingCamp/UpComingCamp";
 import UpcomingPage from "../Pages/Home/UpComingCampHome/UpDetailsPage/UpcomingPage";
+import AddHealthTips from "../Pages/DashBoard/AddHealthTips/AddHealthTips";
 
 
 
@@ -106,6 +107,10 @@ export const router = createBrowserRouter([
             {
                 path:'addCamp',
                 element:<AdminRoute><AddCamp></AddCamp></AdminRoute>
+            },
+            {
+                path:'healthTips',
+                element:<AdminRoute><AddHealthTips></AddHealthTips></AdminRoute>
             },
             {
                 path:'UpComingCamp',
