@@ -25,6 +25,7 @@ import PrivateRoute from "../Pages/PrivateRoute/PrivateRoute";
 import AdminRoute from "../Pages/PrivateRoute/AdminRoute";
 import FeedBack from "../Pages/DashBoard/FeedBack/FeedBack";
 import UpComingCamp from "../Pages/DashBoard/UpComingCamp/UpComingCamp";
+import UpcomingPage from "../Pages/Home/UpComingCampHome/UpDetailsPage/UpcomingPage";
 
 
 
@@ -61,6 +62,12 @@ export const router = createBrowserRouter([
             {
                 path: '/details/:id',
                 element:<PrivateRoute> <DetailsPage></DetailsPage></PrivateRoute>,
+               
+
+            },
+            {
+                path: '/upComingdetails/:id',
+                element:<PrivateRoute> <UpcomingPage></UpcomingPage></PrivateRoute>,
                
 
             },

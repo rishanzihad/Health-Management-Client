@@ -1,10 +1,11 @@
 
 import { Helmet } from "react-helmet-async";
-import useCamp from "../../Hooks/useCamp";
-import { useState } from "react";
+
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import CampCard from "../../AvailableCamp/CampCard";
+
+
+import UpCard from "./UpCard";
 
 
 const UpComingCampHome = () => {
@@ -32,10 +33,10 @@ console.log(camps)
         <h1 className="text-4xl font-bold mt-20 text-white flex underline justify-center">
          Up Comings Camps
         </h1>
-        <div className="grid  gap-5 mt-10 mb-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3  gap-5 mt-10 mb-10">
     
           {
-            camps.map((camp)=><CampCard key={camp._id} camp={camp}></CampCard>)
+            camps.map((camp)=><UpCard key={camp._id} camp={camp}></UpCard>)
           }
         </div>
       </div>
