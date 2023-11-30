@@ -1,8 +1,21 @@
-# React + Vite
+## [ Client Side Live Link](https://exultant-business.surge.sh/)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+•Intuitive and easy-to-navigate design for seamless user interaction.
+Clearly defined user roles for Organizers, Healthcare Professionals, and Participants.
+Conditional display of buttons and information based on user login status.
 
-Currently, two official plugins are available:
+•Comprehensive camp details, including Camp Name, Image, Fees, Date, Venue, Services, and Healthcare Professionals.
+Sorting functionality and participant count display for popular medical camps.
+Dedicated pages for each camp with a "Join Camp" button for participants.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+•Role-based dashboards tailored for Organizers, Healthcare Professionals, and Participants.
+Organizer-specific routes for managing profile, adding camps, and overseeing registered and upcoming camps.
+Participant-specific routes for profile management, viewing registered camps, payment history, and providing feedback
+
+•Modal-based participant registration with user-friendly input fields and validation.
+Secure payment handling through Stripe.js integration.
+Confirmation status updates and cancellation options for registered camps. 
+
+•User profiles for Organizers, Healthcare Professionals, and Participants.
+Dynamic updating of profiles with validation checks and success alerts.
+Participant-specific features like viewing registered camps, payment history, and providing feedback.

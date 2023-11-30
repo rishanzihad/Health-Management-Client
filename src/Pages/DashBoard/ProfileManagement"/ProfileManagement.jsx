@@ -49,7 +49,7 @@ const ProfileManagement = () => {
               name:data.name,
         }
         const email = user.email;
-const updateUserUrl = `http://localhost:5008/users/${email}`;
+const updateUserUrl = `https://medical-camp-server-two.vercel.app/users/${email}`;
 
 
 

@@ -134,13 +134,13 @@ export const router = createBrowserRouter([
             {
                 path:'updateCamp/:id',
                 element:<AdminRoute><UpdateCamp></UpdateCamp></AdminRoute>,
-                loader: ({params}) => fetch(`http://localhost:5008/camps/${params.id}`)
+                loader: ({params}) => fetch(`https://medical-camp-server-two.vercel.app/camps/${params.id}`)
             },
            
             {
                 path:'participantInfo',
                 element:<AdminRoute><ParticipantInfo></ParticipantInfo></AdminRoute>,
-                loader:(()=>fetch('http://localhost:5008/registerInfo'))
+                loader:(()=>fetch('https://medical-camp-server-two.vercel.app/registerInfo'))
             },
     ]
     }

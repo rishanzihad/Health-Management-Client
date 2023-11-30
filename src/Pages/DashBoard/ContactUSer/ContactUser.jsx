@@ -3,6 +3,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 
 const ContactUser = () => {
@@ -39,6 +40,10 @@ const ContactUser = () => {
     }
     return (
         <div>
+             <Helmet>
+                <title>Medical Camp || Contact US</title>
+            
+            </Helmet>
         <div className="flex justify-evenly my-4">
             <h2 className="text-3xl">All Contact</h2>
             <h2 className="text-3xl">Total Contact Information: {contact.length}</h2>

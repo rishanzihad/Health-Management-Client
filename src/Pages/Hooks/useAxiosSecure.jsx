@@ -6,7 +6,7 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5008'
+    baseURL: 'https://medical-camp-server-two.vercel.app'
 })
 const useAxiosSecure = () => {
     const navigate = useNavigate();
