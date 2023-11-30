@@ -1,4 +1,4 @@
-## [ Client Side Live Link](https://exultant-business.surge.sh/)
+## [ Client Side Live Link](https://medical-camp-management.web.app)
 
 •Intuitive and easy-to-navigate design for seamless user interaction.
 Clearly defined user roles for Organizers, Healthcare Professionals, and Participants.
